@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snow Effect</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: black; /* or any preferred color */
+      }
+      .snowflake {
+        position: fixed;
+        color: #fff;
+        user-select: none;
+        z-index: 9999;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // Minimal JavaScript to create snowflakes
+      function createSnowflake() {
+        const snowFlake = document.createElement("div");
+        snowFlake.classList.add("snowflake");
+        snowFlake.textContent = "❄";
+        snowFlake.style.fontSize = Math.random() * 24 + 10 + "px";
+        snowFlake.style.animationDuration = Math.random() * 3 + 2 + "s";
+        snowFlake.style.opacity = Math.random();
+        snowFlake.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+
+        // Position the snowflake at a random location horizontally
+        snowFlake.style.left = Math.random() * window.innerWidth + "px";
+        snowFlake.style.animationName = "fall";
+        snowFlake.style.animationIterationCount = "infinite";
+        snowFlake.style.animationTimingFunction = "linear";
+
+        document.body.appendChild(snowFlake);
+
+        // Remove snowflake after it falls out of view
+        setTimeout(() => {
+          snowFlake.remove();
+        }, snowFlake.style.animationDuration.replace("s", "") * 1000);
+      }
+
+      // Create a new snowflake every 100 milliseconds
+      setInterval(createSnowflake, 100);
+    </script>
+  </body>
+</html>
